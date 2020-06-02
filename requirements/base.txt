@@ -1,0 +1,15 @@
+# Django
+# ------------------------------------------------------------------------------
+django==2.2.3  # pyup: < 3.0  # https://www.djangoproject.com/
+django-crispy-forms==1.7.2  # https://github.com/django-crispy-forms/django-crispy-forms
+django-redis==4.10.0  # https://github.com/niwinz/django-redis
+django-ckeditor==5.7.1  # https://github.com/django-ckeditor/django-ckeditor
+
+# Django REST Framework
+djangorestframework==3.10.0  # https://github.com/encode/django-rest-framework
+coreapi==2.3.3  # https://github.com/core-api/python-client
+djangorestframework-jwt==1.11.0  # http://getblimp.github.io/django-rest-framework-jwt
+drf-yasg==1.16.1  # https://github.com/axnsan12/drf-yasg
+django-filter==2.2.0  # https://github.com/carltongibson/django-filter
+drf-nested-routers==0.91  # https://github.com/alanjds/drf-nested-routers
+packaging
