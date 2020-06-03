@@ -71,7 +71,6 @@ class HatchRecordCreateSerializers(serializers.ModelSerializer):
 
     #     return end_time
 
-
 class HatchRecordDetailSerializers(serializers.ModelSerializer):
     """
        品种详情

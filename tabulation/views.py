@@ -42,6 +42,24 @@ class HatchViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK,
         )
 
+    def update(self, request, pk=None, *args, **kwargs):
+        """
+          编辑
+        """
+        partial = kwargs.pop("partial", False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+
+        self.perform_update(serializer) 
+        fuhuashilu_list = request.data.get('fuhuashilu', None)
+        if fuhuashilu_list:
+            for i in fuhuashilu_list:
+                HatchDetail.objects.filter(id=i['id']).update(**i)
+       
+        return Response(
+            data={"data": serializer.data, "msg": "更新成功", "code": 20000}, status=status.HTTP_200_OK
+        )
 
     def retrieve(self, request, pk=None, *args, **kwargs):
         """
@@ -87,6 +105,7 @@ class HatchViewSet(viewsets.ModelViewSet):
                     # 获取对应的公式
                     dict = {
                         "key": i,
+                        "id": hatchrecord.id,
                         "out_machine": hatchrecord.out_machine,
                         "incubator": i,
                         "pici": hatchrecord.batch,
