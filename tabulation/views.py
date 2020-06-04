@@ -46,19 +46,15 @@ class HatchViewSet(viewsets.ModelViewSet):
         """
           编辑
         """
-        partial = kwargs.pop("partial", False)
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=partial)
-        serializer.is_valid(raise_exception=True)
-
-        self.perform_update(serializer) 
+        self.serializer_class=HatchRecordCreateSerializers
         fuhuashilu_list = request.data.get('fuhuashilu', None)
         if fuhuashilu_list:
             for i in fuhuashilu_list:
                 HatchDetail.objects.filter(id=i['id']).update(**i)
-       
+
+        resp = super().update(request, *args, **kwargs)
         return Response(
-            data={"data": serializer.data, "msg": "更新成功", "code": 20000}, status=status.HTTP_200_OK
+            data={"data": resp.data, "msg": "更新成功", "code": 20000}, status=status.HTTP_200_OK
         )
 
     def retrieve(self, request, pk=None, *args, **kwargs):
